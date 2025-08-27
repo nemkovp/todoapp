@@ -15,6 +15,10 @@ public class TodoItem {
     public TodoItem() {
     }
 
+    public TodoItem(String title) {
+        this.title = title;
+    }
+
     public Long getId() {
         return id;
     }
