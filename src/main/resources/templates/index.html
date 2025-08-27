@@ -7,14 +7,17 @@
 <body>
 <h1>hi, Spring.</h1>
 
+<form th:action="@{/add}" th:object="${newTodo}" method="post">
+    <input type="text" th:field="*{title}" placeholder="enter">
+    <button type="submit">press</button>
+</form>
+
 <ul>
     <li th:each="item : ${allTodos}">
         <span th:text="${item.title}"></span>
     </li>
 </ul>
-<h1></h1>
-<h1></h1>
-<h1></h1>
-<h1></h1>
+
+
 </body>
 </html>

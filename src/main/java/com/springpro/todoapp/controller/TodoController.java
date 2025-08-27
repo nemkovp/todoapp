@@ -6,11 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
 @Controller
-public class TodoController implements CommandLineRunner {
+public class TodoController{
 
     private final TodoRepository todoRepository;
 
@@ -20,18 +22,18 @@ public class TodoController implements CommandLineRunner {
 
     @GetMapping
     public String index(Model model){
-
-        todoRepository.save(new TodoItem("Pavel"));
-        todoRepository.save(new TodoItem("Lisa"));
-
         List<TodoItem> allTodos = todoRepository.findAll();
         model.addAttribute("allTodos",allTodos);
+        model.addAttribute("newTodo", new TodoItem());
 
         return "index";
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    @PostMapping("/add")
+    public String add(@ModelAttribute TodoItem todoItem){
+        todoRepository.save(todoItem);
 
+        return "redirect:/";
     }
+
 }
